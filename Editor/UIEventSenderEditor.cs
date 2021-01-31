@@ -1,8 +1,8 @@
-﻿using Sarteck.UIWorkflow;
+﻿using UIWorkflow.Events;
 using UnityEditor;
 using UnityEngine;
 
-namespace Sartek.UIWorkflow.Editor
+namespace UIWorkflow.Events.Editor
 {
     [CustomEditor(typeof(UIEventSender))]
     class UIEventSenderEditor : UnityEditor.Editor

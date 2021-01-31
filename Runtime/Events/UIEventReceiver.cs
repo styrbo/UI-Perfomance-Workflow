@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Sarteck.UIWorkflow
+namespace UIWorkflow.Events
 {
     [DisallowMultipleComponent]
     public class UIEventReceiver : MonoBehaviour

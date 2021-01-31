@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Sarteck.UIWorkflow
+namespace UIWorkflow.Events
 {
     [RequireComponent(typeof(CanvasGroup))]
     [ExecuteAlways]

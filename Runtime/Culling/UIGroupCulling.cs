@@ -1,0 +1,116 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace UIWorkflow.Culling
+{
+    [RequireComponent(typeof(CanvasGroup))]
+    public class UIGroupCulling : MonoBehaviour
+    {
+        private CanvasGroup _group;
+        private RectTransform _rect;
+
+        private static bool _init = false;
+        private static readonly List<UIGroupCulling> _cullings = new List<UIGroupCulling>();
+
+        private static Vector3[] objectCorners = new Vector3[4];
+        private static Rect screenBounds = new Rect(0f, 0f, Screen.width, Screen.height);
+        private static Vector3 tempScreenSpaceCorner;
+        private static UIGroupCulling _curCulling;
+        private static Camera _cam;
+        private static int visibleCorners;
+        private static int listCount;
+
+        private void Awake()
+        {
+            _group = GetComponent<CanvasGroup>();
+            _rect = GetComponent<RectTransform>();
+
+            if (_cam == null)
+                _cam = Camera.main;
+        }
+
+        private void Start()
+        {
+            if (_init) return;
+
+            var manager = new GameObject("culling manager").AddComponent<UIGroupCullingManager>();
+            manager.StartCoroutine(OnUpdate());
+
+            _init = true;
+        }
+
+        private static IEnumerator OnUpdate()
+        {
+            int i;
+
+            while (true)
+            {
+                i = 0;
+
+                for (; i < listCount; i += 1)
+                {
+                    _curCulling = _cullings[i];
+
+                    _curCulling._group.alpha = IsVisibleFrom(_curCulling._rect) ? 1 : 0;
+                }
+
+                yield return null;
+            }
+        }
+
+        private void OnEnable()
+        {
+            _cullings.Add(this);
+            listCount++;
+        }
+
+        private void OnDisable()
+        {
+            _cullings.Remove(this);
+            listCount--;
+        }
+
+        //code from https://forum.unity.com/threads/test-if-ui-element-is-visible-on-screen.276549/#post-2978773
+        /// <summary>
+        /// Counts the bounding box corners of the given RectTransform that are visible from the given Camera in screen space.
+        /// </summary>
+        /// <returns>The amount of bounding box corners that are visible from the Camera.</returns>
+        /// <param name="rectTransform">Rect transform.</param>
+        /// <param name="camera">Camera.</param>
+        public static bool IsVisibleFrom(RectTransform rectTransform)
+        {
+            // Screen space bounds (assumes camera renders across the entire screen)
+            //objectCorners = new Vector3[4]; allocate gc!!
+            screenBounds = new Rect(0f, 0f, Screen.width, Screen.height);
+
+            rectTransform.GetWorldCorners(objectCorners);
+
+            visibleCorners = 0;
+            for (var i = 0; i < objectCorners.Length; i++) // For each corner in rectTransform
+            {
+                tempScreenSpaceCorner = _cam.WorldToScreenPoint(objectCorners[i]); // Cached
+                if (screenBounds.Contains(tempScreenSpaceCorner)) // If the corner is inside the screen
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        /*
+
+        /// <summary>
+        /// Determines if this RectTransform is at least partially visible from the specified camera.
+        /// Works by checking if any bounding box corner of this RectTransform is inside the cameras screen space view frustrum.
+        /// </summary>
+        /// <returns><c>true</c> if is at least partially visible from the specified camera; otherwise, <c>false</c>.</returns>
+        /// <param name="rectTransform">Rect transform.</param>
+        public static bool IsVisibleFrom(RectTransform rectTransform)
+        {
+            return CountCornersVisibleFrom(rectTransform) > 0; // True if any corners are visible
+        }
+        */
+    }
+}

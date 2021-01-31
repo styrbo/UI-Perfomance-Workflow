@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using Sarteck.UIWorkflow;
+using UIWorkflow.Events;
 using UnityEngine;
 
 [RequireComponent(typeof(UIEventReceiver))]
