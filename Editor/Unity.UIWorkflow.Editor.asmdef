@@ -1,0 +1,15 @@
+{
+    "name": "Unity.UIWorkflow.Editor",
+    "references": [
+        "GUID:940c90e14cdd94244a6e32906c4f908b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
