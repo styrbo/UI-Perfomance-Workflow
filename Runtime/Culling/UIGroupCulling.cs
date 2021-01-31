@@ -82,7 +82,6 @@ namespace UIWorkflow.Culling
         public static bool IsVisibleFrom(RectTransform rectTransform)
         {
             // Screen space bounds (assumes camera renders across the entire screen)
-            //objectCorners = new Vector3[4]; allocate gc!!
             screenBounds = new Rect(0f, 0f, Screen.width, Screen.height);
 
             rectTransform.GetWorldCorners(objectCorners);
@@ -96,21 +95,7 @@ namespace UIWorkflow.Culling
                     return true;
                 }
             }
-
             return false;
         }
-        /*
-
-        /// <summary>
-        /// Determines if this RectTransform is at least partially visible from the specified camera.
-        /// Works by checking if any bounding box corner of this RectTransform is inside the cameras screen space view frustrum.
-        /// </summary>
-        /// <returns><c>true</c> if is at least partially visible from the specified camera; otherwise, <c>false</c>.</returns>
-        /// <param name="rectTransform">Rect transform.</param>
-        public static bool IsVisibleFrom(RectTransform rectTransform)
-        {
-            return CountCornersVisibleFrom(rectTransform) > 0; // True if any corners are visible
-        }
-        */
     }
 }
