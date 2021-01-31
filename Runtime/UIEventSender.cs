@@ -7,8 +7,10 @@ namespace Sarteck.UIWorkflow
     [ExecuteAlways]
     public class UIEventSender : MonoBehaviour
     {
-        internal event Action OnEnable;
-        internal event Action OnDisable;
+        public delegate void VisibilityAction();
+        
+        internal event VisibilityAction OnEnable;
+        internal event VisibilityAction OnDisable;
         private CanvasGroup _group;
 
         public CanvasGroup Group => _group == null ? _group = GetComponent<CanvasGroup>() : _group;

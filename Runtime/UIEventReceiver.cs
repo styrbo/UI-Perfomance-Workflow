@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Sarteck.UIWorkflow
 {
@@ -14,13 +13,13 @@ namespace Sarteck.UIWorkflow
             set => Owner.Visible = value;
         }
 
-        public event Action OnEnable
+        public event UIEventSender.VisibilityAction OnEnable
         {
             add => Owner.OnEnable += value;
             remove => Owner.OnEnable -= value;
         }
 
-        public event Action OnDisable
+        public event UIEventSender.VisibilityAction  OnDisable
         {
             add => Owner.OnDisable += value;
             remove => Owner.OnDisable -= value;

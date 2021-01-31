@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Sarteck.UIWorkflow;
 using UnityEngine;
 
@@ -24,13 +23,13 @@ public class SampleSystemUser : MonoBehaviour
 
     private void ReceiverOnEnable()
     {
-       // print("object enable!");
+       print("object enable!");
         SomeLargeOperation();
     }
 
     private void ReceiverOnDisable()
     {
-      //  print("object disable!");
+      print("object disable!");
         SomeLargeOperation();
     }
 
