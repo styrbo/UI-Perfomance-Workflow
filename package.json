@@ -1,0 +1,16 @@
+{
+  "name": "com.sarteck.ui",
+  "version": "0.1.0",
+  "displayName": "UI Workflow",
+  "description": "This is an example package",
+  "dependencies": {
+    "com.unity.modules.ui": "1.0.0"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Unity",
+    "email": "unity@example.com",
+    "url": "https://www.unity3d.com"
+  },
+  "type": "library"
+}
