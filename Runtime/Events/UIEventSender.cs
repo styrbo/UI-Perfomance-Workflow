@@ -24,7 +24,7 @@ namespace UIWorkflow.Events
                 
                 Group.alpha = value ? 1 : 0;
                 Group.blocksRaycasts = value;
-                Group.interactable = value;
+             //   Group.interactable = value;
                 
                 if(value)
                     OnEnable?.Invoke();

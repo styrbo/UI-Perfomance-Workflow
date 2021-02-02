@@ -6,7 +6,7 @@ using UnityEngine;
 namespace UIWorkflow.Culling
 {
     [RequireComponent(typeof(UIEventReceiver))]
-    public class UIGroupCulling : MonoBehaviour
+    public class UIGroupCulling : MonoBehaviour, IActiveEvents
     {
         private UIEventReceiver _sender;
         private RectTransform _rect;
@@ -60,13 +60,13 @@ namespace UIWorkflow.Culling
             }
         }
 
-        private void OnEnable()
+        void IEnableEvent.OnEnableUI()
         {
             _cullings.Add(this);
             listCount++;
         }
 
-        private void OnDisable()
+        void IDisableEvent.OnDisableUI()
         {
             _cullings.Remove(this);
             listCount--;
@@ -97,5 +97,6 @@ namespace UIWorkflow.Culling
             }
             return false;
         }
+        
     }
 }
