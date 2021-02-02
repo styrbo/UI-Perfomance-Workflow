@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using UIWorkflow.Events;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace UIWorkflow
 {
     [RequireComponent(typeof(LayoutGroup))]
-    public class UIGroupForsedUpdate : MonoBehaviour
+    [RequireComponent(typeof(UIEventReceiver))]
+    public class UIGroupForsedUpdate : MonoBehaviour, IEnableEvent
     {
         private LayoutGroup _layout;
 
@@ -21,11 +23,11 @@ namespace UIWorkflow
             _filter.SetLayoutHorizontal();
             _filter.SetLayoutVertical();
         }
-
-        private void OnEnable()
+        
+        public void OnEnableUI()
         {
             _layout.CalculateLayoutInputHorizontal();
-            _layout.CalculateLayoutInputVertical();
+                        _layout.CalculateLayoutInputVertical();
         }
     }
 }
