@@ -5,10 +5,10 @@ using UnityEngine;
 
 namespace UIWorkflow.Culling
 {
-    [RequireComponent(typeof(UIEventReceiver))]
+    [RequireComponent(typeof(UIEventReceiver), typeof(CanvasGroup))]
     public class UIGroupCulling : MonoBehaviour, IActiveEvents
     {
-        private UIEventReceiver _sender;
+        private CanvasGroup _group;
         private RectTransform _rect;
 
         private static bool _init = false;
@@ -24,7 +24,7 @@ namespace UIWorkflow.Culling
 
         private void Awake()
         {
-            _sender = GetComponent<UIEventReceiver>();
+            _group = GetComponent<CanvasGroup>();
             _rect = GetComponent<RectTransform>();
 
             if (_cam == null)
@@ -53,7 +53,7 @@ namespace UIWorkflow.Culling
                 {
                     _curCulling = _cullings[i];
 
-                    _curCulling._sender.Visible = IsVisibleFrom(_curCulling._rect);
+                    _curCulling._group.alpha = IsVisibleFrom(_curCulling._rect) ? 1 : 0;
                 }
 
                 yield return null;

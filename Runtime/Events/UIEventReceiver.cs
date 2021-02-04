@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace UIWorkflow.Events
 {
@@ -34,11 +35,14 @@ namespace UIWorkflow.Events
         {
             GetReceivers();
             TrySubscribeEvents();
+            if(Visible)
+                InvokeEnableEvents();
         }
-
+        
         private void OnDestroy()
         {
-            TrySubscribeEvents();
+            InvokeDisableEvents();
+            TryUnsubscribeEvents();
         }
 
         public UIEventSender FindOwner()
